@@ -17,6 +17,10 @@ class libvirt::params {
           $libvirt_package_names  = ['libvirt-daemon-system', 'qemu']
           $service_name           = 'libvirtd'
         }
+        'buster': {
+          $libvirt_package_names  = ['libvirt-daemon-system', 'qemu']
+          $service_name           = 'libvirtd'
+        }
         'trusty', 'xenial': {
           $libvirt_package_names  = ['libvirt-bin', 'qemu-kvm']
           $service_name           = 'libvirt-bin'
