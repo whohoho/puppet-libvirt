@@ -1,9 +1,36 @@
 <filter name='<%= @name %>'>
   <uuid><%= @uuid %></uuid>
-  <filterref filter='clean-traffic'>
-    <parameter name='IP' value='<%= @ip %>'/>
-  </filterref>
+ 
 
+    <% if @dhcpserver != '' -%>
+      <filterref filter='clean-traffic'>
+     <!-- does it check that??        <parameter name='MAC' value='<%= @mac %>'/> -->
+      </filterref>
+
+      <parameter name='CTRL_IP_LEARNING' value='dhcp'/>
+ 
+      <filterref filter='allow-dhcp-server'/>
+        <parameter name='DHCPSERVER' value='<%= @dhcpserver %>'/>
+      </filterref>
+
+    <% else %>
+ 
+        <filterref filter='clean-traffic'>
+        <!-- does it check that?         <parameter name='MAC' value='<%= @mac %>'/> -->
+         <parameter name='IP' value='<%= @ip %>'/>
+       </filterref>
+     <% end %>
+
+<!--
+    <filterref filter='allow-dhcp'/>
+    <filterref filter='no-mac-spoofing'/>
+    <filterref filter='no-ip-spoofing'/>
+    <filterref filter='no-arp-spoofing'/>
+-->
+    <filterref filter='no-other-l2-traffic'/>
+    <filterref filter='no-ip-multicast'/>
+   
+  
   <rule action='accept' direction='in'>
     <all state='ESTABLISHED'/>
   </rule>

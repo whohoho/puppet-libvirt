@@ -34,6 +34,8 @@ define libvirt::nwfilter (
   $publicudpservices = [],
   $customtcprules    = [],
   $customudprules    = [],
+  $dhcpserver        = undef,
+  $mac               = undef,
 ) {
 
   include ::libvirt
